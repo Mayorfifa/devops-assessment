@@ -26,24 +26,3 @@ jobs:
         context: .
         push: true
         tags: mayorfifa/reverse-ip-app:latest
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Install kubectl
-      uses: azure/setup-kubectl@v1
-      with:
-        version: 'v1.18.0'
-
-    - name: Install Helm
-      uses: azure/setup-helm@v1
-      with:
-        version: v3.1.2
-
-    - name: Deploy to Kubernetes
-      run: |
-        kubectl apply -f k8s-deployment.yaml
